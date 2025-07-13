@@ -1,21 +1,21 @@
 resource "aws_instance" "roboshop" {
   count                  = length(var.instances)
   ami                    = var.ami_id # left and right side names no need to be same
-  instance_type          = lookup(var.instance, terraform.workspace)
+  instance_type          = lookup(var.instance_type, terraform.workspace)
   vpc_security_group_ids = [ aws_security_group.allow_all.id ]
 
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.instances[count.index]}-${terraform.workspace}"
-      component = var.instance[count.index]
+      Name = "${var.project}-${var.instances[count.index]}-${terraform.workspace}"
+      component = var.instances[count.index]
       Environment = terraform.workspace
     }
   )
 }
 
 resource "aws_security_group" "allow_all" {
-  name = "${var.sg_name}-${var.environment}" # allow-all-dev
+  name = "${var.project}-${var.sg_name}-${terraform.workspace}" # allow-all-dev
   description = var.sg_description
           
   ingress { 
@@ -37,7 +37,7 @@ resource "aws_security_group" "allow_all" {
     tags = merge(
         var.common_tags,
         {
-          Name = "${var.sg_name}-${var.environment}"
+          Name = "${var.project}-${var.sg_name}-${terraform.workspace}"
         }
     )
 }

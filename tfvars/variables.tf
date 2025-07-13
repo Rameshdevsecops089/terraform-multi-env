@@ -6,6 +6,10 @@ variable "environment" {
 
 }
 
+variable "instance_type" {
+    
+}
+
 variable "common_tags" {
     default =   {
         project = "roboshop"
@@ -36,3 +40,10 @@ variable "to_port" {
 variable "cidr_blocks" {
     default = ["0.0.0.0/0"]
 }
+
+variable "ami_id" {
+  type        = string
+  default     = "ami-09c813fb71547fc4f"
+  description = "AMI ID of joindevops RHEL9"
+}
+

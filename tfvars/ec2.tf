@@ -8,7 +8,7 @@ resource "aws_instance" "roboshop" {
     var.common_tags,
     {
       Name = "${var.project}-${var.instances[count.index]}-${var.environment}"
-      component = var.instance[count.index]
+      Component = var.instances[count.index]
       Environment = var.environment
     }
   )

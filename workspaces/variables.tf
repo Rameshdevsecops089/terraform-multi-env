@@ -2,10 +2,6 @@ variable "project" {
     default = "roboshop"
 }
 
-variable "environment" {
-
-}
-
 variable "common_tags" {
     default =   {
         project = "roboshop"
@@ -21,7 +17,7 @@ variable "sg_description" {
     default = "allowing all ports from all IP"
 }
 
-variable "instance" {
+variable "instances" {
     default = ["mongodb","redis"]
 }
 
